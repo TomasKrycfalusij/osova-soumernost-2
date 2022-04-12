@@ -1,5 +1,6 @@
 let displej = 5
 let osaX = 2
+let trojuhelnik = [[0, randint(0, displej - 1)], [1, randint(0, displej - 1)], [2, randint(0, displej - 1)]]
 // OSA
 function draw_osaX() {
     for (let i = 0; i < displej; i++) {
@@ -8,26 +9,26 @@ function draw_osaX() {
 }
 
 // BODY
-let A = []
-function rozhod_body() {
-    
-    A = [2, randint(0, displej - 1)]
-    let B = [randint(0, 1), randint(0, displej - 1)]
-    let C = [randint(0, 1), randint(0, displej - 1)]
-    if (B == C) {
-        rozhod_body()
+function klm() {
+    for (let bod of trojuhelnik) {
+        led.plot(bod[0], bod[1])
     }
-    
 }
 
-rozhod_body()
-console.log(A)
-// def zobrazeni_bodu():
-// led.plot(A[0], A[1])
+// MIRROR
+function mirror() {
+    for (let bod of trojuhelnik) {
+        led.plot(Math.abs(bod[0] - 4), bod[1])
+    }
+}
+
+// ZABLIKANI
 for (let a = 0; a < 3; a++) {
     draw_osaX()
-    // zobrazeni_bodu()
+    klm()
+    mirror()
     basic.pause(1000)
     basic.clearScreen()
+    draw_osaX()
     basic.pause(1000)
 }
